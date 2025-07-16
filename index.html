@@ -1,17 +1,715 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kai Mechanic - Automotive Precision</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Auto Care - Premium Automotive Excellence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b00, #ff8f00, #ffa000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff6b00, #ff8f00);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ff8f00;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 10rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 143, 0, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0, #ff8f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b00, #ff8f00, #ffa000);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 0, 0.6);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            margin: 2rem 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: #ffffff;
+            position: relative;
+            font-weight: 900;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b00, #ff8f00, #ffa000);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #0d0d0d 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+        }
+
+        .about-text h3 {
+            color: #ff8f00;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            transition: transform 0.3s;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Values */
+        .values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .value-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: all 0.4s;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .value-item:hover::before {
+            opacity: 1;
+        }
+
+        .value-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(255, 107, 0, 0.2);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b00, #ff8f00, #ffa000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .value-item h3 {
+            color: #ff8f00;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Services */
+        .services {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.02;
+            z-index: 1;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(255, 107, 0, 0.3);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+
+        .service-card h3 {
+            color: #ff8f00;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #c0c0c0;
+            line-height: 1.8;
+        }
+
+        /* Hours */
+        .hours {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8f00 50%, #ffa000 100%);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 107, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hours::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hours h2 {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hours-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .hours-item:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Brands */
+        .brands {
+            text-align: center;
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #0d0d0d 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .brand-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .brand-logo {
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff8f00;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 0 auto;
+            transition: all 0.3s;
+            border: 1px solid #333;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .contact h2 {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .contact-item:hover::before {
+            opacity: 1;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.2);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b00, #ff8f00, #ffa000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .contact-item h3 {
+            color: #ff8f00;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-item strong {
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .values {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Premium Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 0, 0.6); }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .glow-effect {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff8f00;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
     <header>
         <nav class="container">
-            <div class="logo">
-                <img src="assets/logo.png" alt="Kai Mechanic Logo" />
-            </div>
+            <div class="logo">ELITE AUTO</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -22,16 +720,77 @@
     </header>
 
     <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Kai Mechanic</h1>
-            <p class="hero-subtitle">Automotive excellence redefined. Precision, power, performance.</p>
-            <a href="#contact" class="cta-button">Book Premium Service</a>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Premium Automotive Excellence</h1>
+                <p class="hero-subtitle">Experience unparalleled automotive care with our state-of-the-art facilities and expert technicians. From precision diagnostics to luxury detailing, we deliver excellence in every service.</p>
+                <a href="#contact" class="cta-button glow-effect">Book Premium Service</a>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Kai Mechanic. All rights reserved.</p>
-        <p>Entertained by MB18 Solutions</p>
-    </footer>
-</body>
-</html>
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about fade-in">
+                <h2>Precision Engineering</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Where Luxury Meets Performance</h3>
+                        <p>At Elite Auto, we redefine automotive excellence through precision engineering and uncompromising quality. Our state-of-the-art facility houses the latest diagnostic equipment and skilled technicians trained on the world's most prestigious automotive brands.</p>
+                        <p>Every service is executed with meticulous attention to detail, ensuring your vehicle receives the premium care it deserves. From routine maintenance to complex repairs, we deliver results that exceed expectations.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Premium Automotive Workshop">
+                    </div>
+                </div>
+                
+                <div class="values">
+                    <div class="value-item">
+                        <div class="value-icon">💎</div>
+                        <h3>Premium Quality</h3>
+                        <p>Uncompromising standards with premium parts and materials</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🔬</div>
+                        <h3>Precision</h3>
+                        <p>Advanced diagnostics and precision engineering</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">⚡</div>
+                        <h3>Innovation</h3>
+                        <p>Cutting-edge technology and modern solutions</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🏆</div>
+                        <h3>Excellence</h3>
+                        <p>Award-winning service and customer satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="container">
+            <div class="services fade-in">
+                <h2>Premium Services</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: #c0c0c0;">Comprehensive automotive solutions tailored for discerning clients</p>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Transmission Service" class="service-image">
+                        <h3>Transmission Excellence</h3>
+                        <p>Expert transmission diagnostics, rebuilds, and performance tuning for optimal drivability and longevity.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Luxury Detailing" class="service-image">
+                        <h3>Luxury Detailing</h3>
+                        <p>Premium paint correction, ceramic coating, and interior restoration to maintain your vehicle's pristine condition.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80" alt="Advanced Diagnostics" class="service-image">
+                        <h3>Advanced Diagnostics</h3>
+                        <p>State-of-the-art computer diagnostics for modern vehicles, hybrid systems, and electric powertrains.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYW
